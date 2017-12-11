@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}
+{% endblock %}
+
+{% block body %}
+
+<form action="" method="post">
+  <dl>
+    <dt>Class ID:
+    <dd><input type="text" name="Class_id" size="30" value="{{ request.form.Class_id }}">
+    <dt>Class Name:
+    <dd><input type="text" name="Name" size="30" value="{{ request.form.Name }}">
+    <dt>Credits:
+    <dd><input type="text" name="Credits" size="30" value="{{ request.form.Credits }}">
+  </dl>
+<div class="actions"><input type="submit" value="Sign Up"></div>
+{% endblock %}

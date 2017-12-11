@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style>
+			button {
+				    background-color: #4CAF50;
+				    border: none;
+				    color: white;
+				    padding: 15px 32px;
+				    text-align: center;
+				    text-decoration: none;
+				    display: inline-block;
+				    font-size: 16px;
+				    margin: 4px 4px;
+				    cursor: pointer;
+				    position:relative;
+    				    top:50%;
+    				    left:33%;
+				}
+		</style> 
+   	</head>
+	<body>
+		<img id="image" src="https://www.what-dog.net/Images/faces2/scroll0015.jpg">
+		<button id = "button0" class="button" type="button" style="display: none;"> 1. Dog</button></div>
+		<button id = "button1" class="button" type="button" style="display: none;"> 2. Cat</button></div>
+		<button id = "button2" class="button" type="button" style="display: none;"> 3. Frog</button></div>
+
+		<script>
+			$('#image').delay(2000).hide(0);
+  			$('#button0').delay(2000).show(0);
+  			$('#button1').delay(2000).show(0);
+  			$('#button2').delay(2000).show(0);
+		</script>
+    	</body>
+</html>

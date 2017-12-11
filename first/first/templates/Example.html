@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style>
+			button {
+				    background-color: #4CAF50;
+				    border: none;
+				    color: white;
+				    padding: 15px 32px;
+				    text-align: center;
+				    text-decoration: none;
+				    display: inline-block;
+				    font-size: 16px;
+				    margin: 4px 4px;
+				    cursor: pointer;
+				    position:relative;
+    				    top:50%;
+    				    left:33%;
+				}
+		</style> 
+{% endblock %}
+
+{% block body %}
+{% for query in data %}
+	<img id="image" src="{{query.image}}">
+		<a href="{{url_for('trial',code=query.url1)}}">
+			<button id = "button0" style="display: none;">{{query.data1}}</button>
+		</a>
+		<a href="{{url_for('trial',code=query.url2)}}">
+			<button id = "button1" style="display: none;">{{query.data2}}</button>
+		</a>
+		<a href="{{url_for('trial',code=query.url3)}}">
+			<button id = "button2" style="display: none;">{{query.data3}}</button>
+		</a>
+		<script>
+			$('#image').delay(2000).hide(0);
+  			$('#button0').delay(2000).show(0);
+  			$('#button1').delay(2000).show(0);
+  			$('#button2').delay(2000).show(0);
+		</script>
+{% endfor %}
+{% endblock %}
