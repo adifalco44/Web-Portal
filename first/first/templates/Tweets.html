@@ -5,11 +5,15 @@
 {% block body %}
 <ul class="data">
 {% for query in data %}
+
   <div class="row">
     <div class="col-sm-4" style="background-color:rgb(102,204,255)">
-       <h3 class="bg-primary text-white">  {{query.First}}   {{query.Last}} </h3>
-      <p> ID # {{query.Student_id}}</p>
+       <h3 class="bg-primary text-white"> ID : {{query.Data_id}}  </h3>
+      <p> Text : {{query.Text}}</p>
+      <p> X Coordinate # {{query.GeoX}}</p>
+      <p> Y Coordinate # {{query.GeoY}}</p>
     </div>
   </div>
-  {% endfor %}
+{% endfor %}
+
 {% endblock %}

@@ -6,7 +6,7 @@
     A program that reads in a hard-coded static db and retrieves via qeuery
 
 """
-import os, string
+import os, sys, string
 import time, tweepy, json
 from sqlite3 import dbapi2 as sqlite3
 from hashlib import md5
@@ -17,7 +17,7 @@ from werkzeug import check_password_hash, generate_password_hash
 
 
 # configuration
-DATABASE = '/tmp/index.db'
+DATABASE = 'tmp/index.db'
 #PER_PAGE = 30
 #DEBUG = True
 #SECRET_KEY = b'_5#y2L"F4Q8z\n\xec]/'
@@ -61,9 +61,6 @@ def init_db():
     with app.open_resource('schema.sql', mode='r') as f:
         db.cursor().executescript(f.read())
     db.commit()
-#    db.execute('insert into Exp (Session_id, Image, Opt1, Opt2, Opt3, Sol) values (?, ?, ?, ?, ?, ?)',
-#              [1,"https://www.what-dog.net/Images/faces2/scroll0015.jpg","Cat","Dog","Fish","Dog"])
-#    db.commit()
 
 @app.cli.command('initdb')
 def initdb_command():
@@ -78,25 +75,28 @@ def query_db(query, args=(), one=False):
     return (rv[0] if rv else None) if one else rv
 
 @app.route('/Tweets')
-def students_page():
+def tweets_page():
     db = get_db()
-    query = query_db('''select * from Tweets''')
+    query = query_db('''SELECT * FROM Tweets''')
+#    print(query)
     return render_template('Tweets.html',data=query)
 
-class FilteredStream(tweepy.StreamListener):
-	def on_status(self,status):
-	db = get_db()
-	db.execute('''insert into Tweets (Tweet_ID,Text,Date_Var) values (?,?,?)''',
-			[status.id,status.text,status.date])
-	db.commit()	
-
-
 @app.route('/Curl')
-def classes_page():
+def curl_page():
+    i = 0
     db = get_db()
-    streamListener = FilteredStream()
-    stream = tweepy.Stream(auth=api.auth,listener=streamListener)
-    stream.filter(locations[1,1,1,1])
-
-
+    with open("tmp_results.txt","r+") as f:
+        data = f.readlines()
+        for line in data:
+            tmp = line.split(',')
+            try:
+                text = tmp[1].replace('^^^',',')
+                db.execute('''insert into Tweets(Tweet_ID,Text,GeoX,GeoY) values (?,?,?,?)''', 
+                     [tmp[0],text,tmp[2],tmp[3]])
+                db.commit()
+            except IndexError:
+                print("Bad tweet:(")
+    os.system("rm tmp_results.txt")
+    return redirect('/Tweets')
+   
 
