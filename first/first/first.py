@@ -91,8 +91,8 @@ def curl_page():
             tmp = line.split(',')
             try:
                 text = tmp[1].replace('^^^',',')
-                db.execute('''insert into Tweets(Tweet_ID,Text,GeoX,GeoY) values (?,?,?,?)''', 
-                     [tmp[0],text,tmp[2],tmp[3]])
+                db.execute('''insert into Tweets(Tweet_ID,Text,GeoX,GeoY,Time) values (?,?,?,?,?)''', 
+                     [tmp[0],text,tmp[2],tmp[3],tmp[4]])
                 db.commit()
             except IndexError:
                 print("Bad tweet:(")

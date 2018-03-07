@@ -4,6 +4,7 @@ create table Tweets (
   Tweet_ID integer,
   Text varchar,
   GeoX decimal,
-  GeoY decimal
+  GeoY decimal,
+  Time date
 );
 
