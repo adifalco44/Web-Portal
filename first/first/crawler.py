@@ -13,13 +13,23 @@ api = tweepy.API(auth)
 
 
 class FilteredStream(tweepy.StreamListener):
-        def on_status(self,status):
+    def __init__(self,time_limit=60):
+        self.start_time = time.time()
+        self.limit = time_limit
+        os.system("touch tmp_results")
+        self.File = open("tmp_results.txt","r+")
+        super(FilteredStream,self).__init__()
+    
+    def on_status(self,status):
+        if (time.time() - self.start_time) < self.limit:
             if type(status.geo)!=type(None):
-                print("{0},{1},{2},{3},{4}".format(status.id_str,status.text.replace(',','^^^').strip('\n'),status.geo['coordinates'][0],status.geo['coordinates'][1],status.created_at))
+                self.File.write("{0},{1},{2},{3},{4}\n".format(status.id_str,status.text.replace(',','^^^').replace('\n',"").replace('-&gt',""),status.geo['coordinates'][0],status.geo['coordinates'][1],status.created_at))
+            return True
+        else:
+            self.File.close()
+            return False
 
-streamListener = FilteredStream()
-stream = tweepy.Stream(auth=api.auth,listener=streamListener)
+os.system("touch tmp_results.txt")
+stream = tweepy.Stream(auth=api.auth,listener=FilteredStream(time_limit=10))
 stream.filter(locations=[-124,24,-66,49])
-
-
-
+print("done")
