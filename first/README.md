@@ -3,7 +3,7 @@ INSTRUCTIONS TO RUN
 
 1. export virtual env using : source test/bin/activate
 
-2.  run python crawler.py | tee first/tmp_results.txt
+2.  run python crawler.py | tee tmp_results.txt
 
 3. type export FLASK_APP=first.py in the folder that contains first.py and the dir templates
 
