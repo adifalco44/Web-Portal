@@ -2,9 +2,7 @@
 """
     First Flask db Demo
     ~~~~~~~~
-
     A program that reads in a hard-coded static db and retrieves via qeuery
-
 """
 import os, sys, string
 import time, tweepy, json
@@ -98,5 +96,65 @@ def curl_page():
                 print("Bad tweet:(")
     os.system("rm tmp_results.txt")
     return redirect('/Tweets')
-   
 
+
+@app.route('/SentimentPins')
+def sentiment_page():
+    print("Starting Analysis...")
+    db = get_db()
+    c = db.cursor()
+    gmap = gmplot.GoogleMapPlotter(39.8283, -98.5795, 5)
+    posNounPhrases = dict()
+    negNounPhrases = dict()
+    for row in c.execute('''SELECT * FROM Tweets'''):
+        #text is 2, lats are 3, lons are 4
+        tweetBlob = TextBlob(row[2])
+        nounList = tweetBlob.split()
+        if float(tweetBlob.sentiment.polarity)>0:
+            gmap.marker(float(row[3]), float(row[4]), '#FF0000')
+
+            for i in nounList:
+                try:
+                    posNounPhrases[i] += 1
+                except KeyError:
+                    posNounPhrases[i] = 1
+        elif float(tweetBlob.sentiment.polarity)==0:
+            pass
+        else:
+            gmap.marker(float(row[3]), float(row[4]), 'cornflowerblue')
+
+            for i in nounList:
+                #print(i)
+                try:
+                    negNounPhrases[i] += 1
+                except KeyError:
+                    negNounPhrases[i] = 1
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    newPath = dir_path + "/templates/my_map.html"
+    gmap.draw(newPath)
+    pos = []
+    neg = []
+    #print(posNounPhrases)
+    #print(negNounPhrases)
+    for i in posNounPhrases:
+        pos.append((posNounPhrases[i],i))
+    for i in negNounPhrases:
+        neg.append((negNounPhrases[i],i))
+    pos = sorted(pos, reverse = True)
+    neg = sorted(neg, reverse = True)
+    posStr = ""
+    negStr = ""
+    posCount = 0
+    negCount = 0
+    for i in range(100):
+        if posCount < 10 and len(pos[i][1])>3:
+            posStr += pos[i][1] + ", "
+            posCount += 1
+        if negCount < 10 and len(neg[i][1])>3:
+            negStr += neg[i][1] + ", "
+            negCount += 1
+    print("Most positive phrases: " + posStr)
+    print("Most negative phrases: " + negStr)
+        
+    return render_template('my_map.html')
+   
