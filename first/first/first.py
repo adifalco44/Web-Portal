@@ -4,6 +4,7 @@
     ~~~~~~~~
     A program that reads in a hard-coded static db and retrieves via qeuery
 """
+import webbrowser as wb
 import os, sys, string
 import time, tweepy, json
 from sqlite3 import dbapi2 as sqlite3
@@ -12,6 +13,8 @@ from datetime import datetime
 from flask import Flask, request, session, url_for, redirect, \
      render_template, abort, g, flash, _app_ctx_stack
 from werkzeug import check_password_hash, generate_password_hash
+from textblob import TextBlob
+from gmplot import gmplot
 
 
 # configuration
