@@ -2,11 +2,8 @@
 """
     First Flask db Demo
     ~~~~~~~~
-
     A program that reads in a hard-coded static db and retrieves via qeuery
-
 """
-import webbrowser as wb
 import os, sys, string
 import time, tweepy, json
 from sqlite3 import dbapi2 as sqlite3
@@ -15,8 +12,6 @@ from datetime import datetime
 from flask import Flask, request, session, url_for, redirect, \
      render_template, abort, g, flash, _app_ctx_stack
 from werkzeug import check_password_hash, generate_password_hash
-from textblob import TextBlob
-from gmplot import gmplot
 
 
 # configuration
@@ -88,7 +83,7 @@ def tweets_page():
 def curl_page():
     i = 0
     db = get_db()
-    with open("tweets.txt","r+") as f:
+    with open("tmp_results.txt","r+") as f:
         data = f.readlines()
         for line in data:
             tmp = line.split(',')
@@ -99,9 +94,9 @@ def curl_page():
                 db.commit()
             except IndexError:
                 print("Bad tweet:(")
-    #os.system("rm tmp_results.txt")
+    os.system("rm tmp_results.txt")
     return redirect('/Tweets')
-   
+
 
 @app.route('/SentimentPins')
 def sentiment_page():
@@ -117,7 +112,7 @@ def sentiment_page():
         nounList = tweetBlob.split()
         if float(tweetBlob.sentiment.polarity)>0:
             gmap.marker(float(row[3]), float(row[4]), '#FF0000')
-
+            print(tweetBlob.sentiment.polarity, row[2])
             for i in nounList:
                 try:
                     posNounPhrases[i] += 1
@@ -127,7 +122,7 @@ def sentiment_page():
             pass
         else:
             gmap.marker(float(row[3]), float(row[4]), 'cornflowerblue')
-
+            print(tweetBlob.sentiment.polarity, row[2])
             for i in nounList:
                 #print(i)
                 try:
@@ -164,38 +159,3 @@ def sentiment_page():
         
     return redirect('/Tweets')
    
-
-##@app.route('/SentimentHeat')
-##def sentimentHeat_page():
-##    db = get_db()
-##    c = db.cursor()
-##    gmapPos = gmplot.GoogleMapPlotter(39.8283, -98.5795, 5)
-##    gmapNeg = gmplot.GoogleMapPlotter(39.8283, -98.5795, 5)
-##    posLat = []
-##    posLon = []
-##    posWeight = []
-##    negLat = []
-##    negLon = []
-##    negWeight = []
-##    for row in c.execute('''SELECT * FROM Tweets'''):
-##        #text is 2, lats are 3, lons are 4
-##        tweetBlob = TextBlob(row[2])
-##        #print(float(tweetBlob.sentiment.polarity))
-##        if float(tweetBlob.sentiment.polarity)>0:
-##            posLat.append((float(row[3]),float(row[4])))
-##            #posLon.append(row[4])
-##            #posWeight.append(tweetBlob.sentiment.polarity)
-##        elif float(tweetBlob.sentiment.polarity)==0:
-##            pass
-##        else:
-##            negLat.append((float(row[3]),float(row[4])))
-##            #negLon.append(row[4])
-##            #negWeight.append(tweetBlob.sentiment.polarity)
-##    lats,lons = zip(*posLat)
-##    lats2,lons2 = zip(*negLat)
-##    gmapPos.heatmap(lats,lons)
-##    gmapNeg.heatmap(lats2,lons2)
-##    
-##    gmapPos.draw("../templates/posMap.html")
-##    gmapNeg.draw("negMap.html")
-##    return(None)
