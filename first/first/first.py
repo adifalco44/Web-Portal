@@ -202,7 +202,7 @@ def sentiment_page():
                     negNounPhrases[i] = 1
                 
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    newPath = dir_path + "/templates/my_map.html"
+    newPath = dir_path + "/templates/{0}.html".format(uid)
     gmap.draw(newPath)
     pos = []
     neg = []
