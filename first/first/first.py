@@ -228,13 +228,13 @@ def sentiment_page():
     print("Most negative phrases: " + negStr)
     print("Total tweets with neutral sentiment: " + str(count))
     count = 0
-    with open("/templates/my_map.html","r+") as f:
+    with open(newPath,"r+") as f:
         data = f.readlines()
-        for line in data
+        for line in data:
             if count==2:
-                f.write('<meta http-equiv="refresh" content="2; url=http://google.com/"/>')
+                f.write('<meta http-equiv="refresh" content="120; url=http://127.0.0.1:5000/SentimentPins"/>')
             f.write(line)
-            count+=1           
+            count+=1
     f.close()
     wb.open_new_tab("file://"+newPath)
     return redirect('/Home')
