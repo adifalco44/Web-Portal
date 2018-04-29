@@ -11,7 +11,7 @@ from sqlite3 import dbapi2 as sqlite3
 from hashlib import md5
 from datetime import datetime
 from flask import Flask, request, session, url_for, redirect, \
-     render_template, abort, g, flash, _app_ctx_stack
+     render_template, abort, g, flash, _app_ctx_stack, make_response
 from werkzeug import check_password_hash, generate_password_hash
 from textblob import TextBlob
 from gmplot import gmplot
