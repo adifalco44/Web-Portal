@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
     First Flask db Demo
     ~~~~~~~~
@@ -113,6 +112,7 @@ def curl_page():
     return redirect('/Tweets')
 
 
+
 @app.route('/SentimentPins')
 def sentiment_page():
     print("Starting Analysis...")
@@ -121,29 +121,84 @@ def sentiment_page():
     gmap = gmplot.GoogleMapPlotter(39.8283, -98.5795, 5, apikey='AIzaSyCEYyEKiSKuoEW20-XKL53kJ3CuySnWVbI')
     posNounPhrases = dict()
     negNounPhrases = dict()
+    count = 0
     for row in c.execute('''SELECT * FROM Tweets'''):
         #text is 2, lats are 3, lons are 4
         tweetBlob = TextBlob(row[2])
         nounList = tweetBlob.split()
-        if float(tweetBlob.sentiment.polarity)>0:
-            gmap.marker(float(row[3]), float(row[4]), '#FF0000')
-            print(tweetBlob.sentiment.polarity, row[2])
+        if float(tweetBlob.sentiment.polarity)>.75:
+            gmap.marker(float(row[3]), float(row[4]), 'maroon')
+            #print(tweetBlob.sentiment.polarity, row[2])
+            for i in nounList:
+                try:
+                    posNounPhrases[i] += 1
+                except KeyError:
+                    posNounPhrases[i] = 1
+        elif float(tweetBlob.sentiment.polarity)>.5:
+            gmap.marker(float(row[3]), float(row[4]), 'red')
+            #print(tweetBlob.sentiment.polarity, row[2])
+            for i in nounList:
+                try:
+                    posNounPhrases[i] += 1
+                except KeyError:
+                    posNounPhrases[i] = 1
+        elif float(tweetBlob.sentiment.polarity)>.25:
+            gmap.marker(float(row[3]), float(row[4]), 'deeppink')
+            #print(tweetBlob.sentiment.polarity, row[2])
+            for i in nounList:
+                try:
+                    posNounPhrases[i] += 1
+                except KeyError:
+                    posNounPhrases[i] = 1
+        elif float(tweetBlob.sentiment.polarity)>0:
+            gmap.marker(float(row[3]), float(row[4]), 'pink')
+            #print(tweetBlob.sentiment.polarity, row[2])
             for i in nounList:
                 try:
                     posNounPhrases[i] += 1
                 except KeyError:
                     posNounPhrases[i] = 1
         elif float(tweetBlob.sentiment.polarity)==0:
-            pass
-        else:
-            gmap.marker(float(row[3]), float(row[4]), 'cornflowerblue')
+            pass #gmap.marker(float(row[3]), float(row[4]), '#FFFFFF')
             print(tweetBlob.sentiment.polarity, row[2])
+            count += 1
+        elif float(tweetBlob.sentiment.polarity)>-.25:
+            gmap.marker(float(row[3]), float(row[4]), 'lightblue')
+            #print(tweetBlob.sentiment.polarity, row[2])
             for i in nounList:
                 #print(i)
                 try:
                     negNounPhrases[i] += 1
                 except KeyError:
                     negNounPhrases[i] = 1
+        elif float(tweetBlob.sentiment.polarity)>-.5:
+            gmap.marker(float(row[3]), float(row[4]), 'deepskyblue')
+            #print(tweetBlob.sentiment.polarity, row[2])
+            for i in nounList:
+                #print(i)
+                try:
+                    negNounPhrases[i] += 1
+                except KeyError:
+                    negNounPhrases[i] = 1
+        elif float(tweetBlob.sentiment.polarity)>-.75:
+            gmap.marker(float(row[3]), float(row[4]), 'cornflowerblue')
+            #print(tweetBlob.sentiment.polarity, row[2])
+            for i in nounList:
+                #print(i)
+                try:
+                    negNounPhrases[i] += 1
+                except KeyError:
+                    negNounPhrases[i] = 1
+        elif float(tweetBlob.sentiment.polarity)>-.75:
+            gmap.marker(float(row[3]), float(row[4]), 'darkslateblue')
+            #print(tweetBlob.sentiment.polarity, row[2])
+            for i in nounList:
+                #print(i)
+                try:
+                    negNounPhrases[i] += 1
+                except KeyError:
+                    negNounPhrases[i] = 1
+                
     dir_path = os.path.dirname(os.path.realpath(__file__))
     newPath = dir_path + "/templates/my_map.html"
     gmap.draw(newPath)
@@ -170,7 +225,7 @@ def sentiment_page():
             negCount += 1
     print("Most positive phrases: " + posStr)
     print("Most negative phrases: " + negStr)
+    print("Total tweets with neutral sentiment: " + str(count))
     wb.open_new_tab("file://"+newPath)
         
     return redirect('/Tweets')
-   
