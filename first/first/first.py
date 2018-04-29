@@ -75,6 +75,10 @@ def query_db(query, args=(), one=False):
     rv = cur.fetchall()
     return (rv[0] if rv else None) if one else rv
 
+@app.route('/')
+def home_page():
+    return render_template('index.html')
+
 @app.route('/Tweets')
 def tweets_page():
     db = get_db()
