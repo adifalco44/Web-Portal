@@ -115,6 +115,7 @@ def curl_page():
 
 @app.route('/SentimentPins')
 def sentiment_page():
+    uid = request.cookies.get("UID")
     print("Starting Analysis...")
     db = get_db()
     c = db.cursor()
@@ -226,6 +227,14 @@ def sentiment_page():
     print("Most positive phrases: " + posStr)
     print("Most negative phrases: " + negStr)
     print("Total tweets with neutral sentiment: " + str(count))
+    count = 0
+    with open("/templates/my_map.html","r+") as f:
+        data = f.readlines()
+        for line in data
+            if count==2:
+                f.write('<meta http-equiv="refresh" content="2; url=http://google.com/"/>')
+            f.write(line)
+            count+=1           
+    f.close()
     wb.open_new_tab("file://"+newPath)
-        
-    return redirect('/Tweets')
+    return redirect('/Home')
