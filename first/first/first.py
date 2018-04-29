@@ -5,7 +5,7 @@
     A program that reads in a hard-coded static db and retrieves via qeuery
 """
 import webbrowser as wb
-import os, sys, string
+import os, sys, string, uuid
 import time, tweepy, json
 from sqlite3 import dbapi2 as sqlite3
 from hashlib import md5
@@ -76,6 +76,14 @@ def query_db(query, args=(), one=False):
     return (rv[0] if rv else None) if one else rv
 
 @app.route('/')
+def uuid_page():
+    # Set UID cookie
+    UserID = str(uuid.uuid4())
+    response = make_response(redirect(url_for('home')))
+    response.set_cookie('UID',UserID)
+    return response
+
+@app.route('/Home')
 def home_page():
     return render_template('index.html')
 
