@@ -79,7 +79,7 @@ def query_db(query, args=(), one=False):
 def uuid_page():
     # Set UID cookie
     UserID = str(uuid.uuid4())
-    response = make_response(redirect(url_for('home')))
+    response = make_response(redirect(url_for('home_page')))
     response.set_cookie('UID',UserID)
     return response
 
