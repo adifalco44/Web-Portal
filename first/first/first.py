@@ -97,6 +97,7 @@ def tweets_page():
 def curl_page():
     i = 0
     db = get_db()
+    os.system("python crawler.py")
     with open("tmp_results.txt","r+") as f:
         data = f.readlines()
         for line in data:
