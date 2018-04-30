@@ -123,6 +123,7 @@ def location_page():
 def sentiment_page():
     uid = request.cookies.get("UID")
     location = request.cookies.get("Location")
+    print(location)
     print("Starting Analysis...")
     db = get_db()
     c = db.cursor()
