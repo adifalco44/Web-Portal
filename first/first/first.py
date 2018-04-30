@@ -110,7 +110,7 @@ def curl_page():
             except IndexError:
                 print("Bad tweet:(")
     os.system("rm tmp_results.txt")
-    return redirect('/Tweets')
+    return redirect('/SentimentPins')
 
 @app.route("/Location/<location>")
 def location_page(location):
@@ -242,13 +242,31 @@ def sentiment_page():
     print("Most negative phrases: " + negStr)
     print("Total tweets with neutral sentiment: " + str(count))
     count = 0
+    flag = False
+    flag2=True
     with open(newPath,"r+") as f:
         data = f.readlines()
         for line in data:
             if count==2:
                 f.write('<meta http-equiv="refresh" content="120; url=http://127.0.0.1:5000/SentimentPins"/>')
-            f.write(line)
             count+=1
+            if flag==True and flag2==True:
+                flag2 = False
+                flag = False
+  
+                f.write('<ul class="list-group">')
+                f.write('<li class="list-group-item">People in {0} are upset about . . .</li>'.format(location))
+                 f.write('<li class="list-group-item">{0}</li>'.format(posStr))
+                f.write('/ul')
+       
+                f.write('<ul class="list-group">')
+                f.write('<li class="list-group-item">People in {0} are happy about . . .</li>'.format(location))
+                f.write('<li class="list-group-item">{0}</li>'.format(negStr))
+                f.write('/ul')
+            if "body" in line:
+                flag = True  
+            f.write(line)
+
     f.close()
     wb.open_new_tab("file://"+newPath)
-    return redirect('/Home')
+    return redirect('/Curl')
