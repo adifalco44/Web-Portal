@@ -22,7 +22,10 @@
         <div class="jumbotron">
             <h1>Interested in viewing a sentiment analysis map result for a select locations?</h1>
             <p class="lead"></p>
-            <p><a class="btn btn-lg btn-success" href="showSignUp" role="button">Pick a location</a></p>
+            <p><a class="btn btn-lg btn-success" href="{{}url_for('sentiment_page',location="NY")}" role="button">New York</a></p>
+            <p><a class="btn btn-lg btn-success" href="{{}url_for('sentiment_page',location="LA")}" role="button">Los Angelas</a></p>
+            <p><a class="btn btn-lg btn-success" href="{{}url_for('sentiment_page',location="CH")}" role="button">Chicago</a></p>
+            <p><a class="btn btn-lg btn-success" href="{{}url_for('sentiment_page',location="US")}" role="button">US</a></p>
         </div>
  
         <div class="row marketing">
