@@ -112,11 +112,17 @@ def curl_page():
     os.system("rm tmp_results.txt")
     return redirect('/Tweets')
 
+@app.route("/Location/<location>")
+def location_page():
+    response = make_response(redirect(url_for('sentiment_page')))
+    response.set_cookie('Location',location)
+    return response
 
 
 @app.route('/SentimentPins')
 def sentiment_page():
     uid = request.cookies.get("UID")
+    location = request.cookies.get("Location")
     print("Starting Analysis...")
     db = get_db()
     c = db.cursor()
