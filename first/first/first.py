@@ -112,6 +112,19 @@ def curl_page():
     os.system("rm tmp_results.txt")
     return redirect('/SentimentPins')
 
+@app.route("/Input",methods=['GET','POST'])
+def input_page():
+    if request.method == 'POST':
+        keyword = request.form['keyword']
+        response = make_response(redirect(url_for('sentiment_page')))
+        response.set_cookie('Location',"US")
+        response.set_cookie('Keyword',keyword)
+        return response
+    if request.method == 'GET':
+        return render_template("input.html")
+        
+    
+
 @app.route("/Location/<location>")
 def location_page(location):
     response = make_response(redirect(url_for('sentiment_page')))
@@ -121,7 +134,6 @@ def location_page(location):
 
 @app.route('/SentimentPins')
 def sentiment_page():
-    
     uid = request.cookies.get("UID")
     location = request.cookies.get("Location")
     coordDict = {"NY": (40.7829, -73.9682), "LA": (34.0522,-118.2436), "CH": (41.8781,-87.6232),"US":(39.8283, -98.5795)}
