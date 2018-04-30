@@ -121,13 +121,19 @@ def location_page(location):
 
 @app.route('/SentimentPins')
 def sentiment_page():
+    
     uid = request.cookies.get("UID")
     location = request.cookies.get("Location")
-    print(location)
+    coordDict = {"NY": (40.7829, -73.9682), "LA": (34.0522,-118.2436), "CH": (41.8781,-87.6232),"US":(39.8283, -98.5795)}
+    if location != "US":
+        zoom = 11
+    else:
+        zoom = 5
     print("Starting Analysis...")
     db = get_db()
     c = db.cursor()
-    gmap = gmplot.GoogleMapPlotter(39.8283, -98.5795, 5, apikey='AIzaSyCEYyEKiSKuoEW20-XKL53kJ3CuySnWVbI')
+
+    gmap = gmplot.GoogleMapPlotter(coordDict[location][0], coordDict[location][1],zoom, apikey='AIzaSyCEYyEKiSKuoEW20-XKL53kJ3CuySnWVbI')
     posNounPhrases = dict()
     negNounPhrases = dict()
     count = 0
@@ -169,7 +175,7 @@ def sentiment_page():
                     posNounPhrases[i] = 1
         elif float(tweetBlob.sentiment.polarity)==0:
             pass #gmap.marker(float(row[3]), float(row[4]), '#FFFFFF')
-            print(tweetBlob.sentiment.polarity, row[2])
+            #print(tweetBlob.sentiment.polarity, row[2])
             count += 1
         elif float(tweetBlob.sentiment.polarity)>-.25:
             gmap.marker(float(row[3]), float(row[4]), 'lightblue')
