@@ -256,13 +256,13 @@ def sentiment_page():
   
                 f.write('<ul class="list-group">\n')
                 f.write('<li class="list-group-item">People in {0} are upset about . . .</li>\n'.format(location))
-                 f.write('<li class="list-group-item">{0}</li>\n'.format(posStr))
+                f.write('<li class="list-group-item">{0}</li>\n'.format(posStr))
                 f.write('</ul>\n\n')
        
                 f.write('<ul class="list-group">\n')
                 f.write('<li class="list-group-item">People in {0} are happy about . . .</li>\n'.format(location))
                 f.write('<li class="list-group-item">{0}</li>\n'.format(negStr))
-                f.write('/ul\n')
+                f.write('</ul>\n')
             if "body" in line:
                 flag = True  
             f.write(line)
