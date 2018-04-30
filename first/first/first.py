@@ -113,7 +113,7 @@ def curl_page():
     return redirect('/Tweets')
 
 @app.route("/Location/<location>")
-def location_page():
+def location_page(location):
     response = make_response(redirect(url_for('sentiment_page')))
     response.set_cookie('Location',location)
     return response
