@@ -1,0 +1,86 @@
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>Google Maps - pygmaps </title>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false&key=AIzaSyCEYyEKiSKuoEW20-XKL53kJ3CuySnWVbI"></script>
+<script type="text/javascript">
+	function initialize() {
+		var centerlatlng = new google.maps.LatLng(39.828300, -98.579500);
+		var myOptions = {
+			zoom: 5,
+			center: centerlatlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+		var latlng = new google.maps.LatLng(40.785301, -73.972974);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(29.894762, -81.313404);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(40.680670, -73.952120);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(33.979400, -118.453000);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(33.869990, -117.925950);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/800000.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(37.826922, -122.210533);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(37.826922, -122.210533);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+	}
+</script>
+</head>
+<body style="margin:0px; padding:0px;" onload="initialize()">
+	<div id="map_canvas" style="width: 100%; height: 100%;"></div>
+</body>
+</html>

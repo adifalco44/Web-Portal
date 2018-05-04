@@ -1,0 +1,379 @@
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>Google Maps - pygmaps </title>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false&key=AIzaSyCEYyEKiSKuoEW20-XKL53kJ3CuySnWVbI"></script>
+<script type="text/javascript">
+	function initialize() {
+		var centerlatlng = new google.maps.LatLng(39.828300, -98.579500);
+		var myOptions = {
+			zoom: 5,
+			center: centerlatlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+		var latlng = new google.maps.LatLng(41.892180, -87.623780);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/800000.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(30.255110, -97.718100);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF0000.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(24.140500, -110.312000);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(32.377716, -86.300489);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(40.731260, -74.003610);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(25.805980, -80.123770);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(25.786580, -80.140710);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(33.354993, -111.789342);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/800000.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(45.425991, -75.692174);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/ADD8E6.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(37.392180, -122.036400);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/ADD8E6.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(38.614230, -77.360481);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF0000.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(30.265424, -97.739810);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(33.838100, -79.056100);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/6495ED.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(40.340000, -75.110000);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/800000.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(36.164722, -115.270645);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(30.267200, -97.763900);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(40.586770, -105.077500);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(39.940040, -75.150950);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+	}
+</script>
+</head>
+<body style="margin:0px; padding:0px;" onload="initialize()">
+	<div id="map_canvas" style="width: 100%; height: 100%;"></div>
+</body>
+</html>
+<html>
+<head>
+<meta http-equiv="refresh" content="120; url=http://127.0.0.1:5000/SentimentPins"/><meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>Google Maps - pygmaps </title>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false&key=AIzaSyCEYyEKiSKuoEW20-XKL53kJ3CuySnWVbI"></script>
+<script type="text/javascript">
+	function initialize() {
+		var centerlatlng = new google.maps.LatLng(39.828300, -98.579500);
+		var myOptions = {
+			zoom: 5,
+			center: centerlatlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+		var latlng = new google.maps.LatLng(41.892180, -87.623780);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/800000.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(30.255110, -97.718100);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF0000.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(24.140500, -110.312000);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(32.377716, -86.300489);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(40.731260, -74.003610);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(25.805980, -80.123770);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(25.786580, -80.140710);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(33.354993, -111.789342);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/800000.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(45.425991, -75.692174);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/ADD8E6.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(37.392180, -122.036400);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/ADD8E6.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(38.614230, -77.360481);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF0000.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(30.265424, -97.739810);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(33.838100, -79.056100);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/6495ED.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(40.340000, -75.110000);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/800000.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(36.164722, -115.270645);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(30.267200, -97.763900);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(40.586770, -105.077500);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FFC0CB.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(39.940040, -75.150950);
+		var img = new google.maps.MarkerImage('/Users/gabrielwright/anaconda3/lib/python3.6/site-packages/gmplot/markers/FF1493.png');
+		var marker = new google.maps.Marker({
+		title: "no implementation",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+	}
+</script>
+</head>
+<body style="margin:0px; padding:0px;" onload="initialize()">
+<ul class="list-group">
+<li class="list-group-item">People in US are upset about . . .</li>
+<li class="list-group-item">food, with, some, love, fresh, 😉💪💪💪, 😂.....zoodles, you…, when, week, </li>
+</ul>
+
+<ul class="list-group">
+<li class="list-group-item">People in US are happy about . . .</li>
+<li class="list-group-item">food, 🍹Italian, with, wine, went, week, trip., some, soda, sick., </li>
+</ul>
+	<div id="map_canvas" style="width: 100%; height: 100%;"></div>
+</body>
+</html>

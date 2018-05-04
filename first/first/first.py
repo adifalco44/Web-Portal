@@ -14,7 +14,11 @@ from flask import Flask, request, session, url_for, redirect, \
 from werkzeug import check_password_hash, generate_password_hash
 from textblob import TextBlob
 from gmplot import gmplot
+from flask_wtf import Form
+from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 
+class ReusableForm(Form):
+    keyword = TextField("Keyword:", validators = [validators.required()])
 
 # configuration
 DATABASE = 'tmp/index.db'
@@ -110,10 +114,11 @@ def curl_page():
             except IndexError:
                 print("Bad tweet:(")
     os.system("rm tmp_results.txt")
-    return redirect('/SentimentPins')
+    return redirect('/Home')
 
 @app.route("/Input",methods=['GET','POST'])
 def input_page():
+    form = ReusableForm(request.form)
     if request.method == 'POST':
         keyword = request.form['keyword']
         response = make_response(redirect(url_for('sentiment_page')))
@@ -121,7 +126,7 @@ def input_page():
         response.set_cookie('Keyword',keyword)
         return response
     if request.method == 'GET':
-        return render_template("input.html")
+        return render_template("input.html", form=form)
         
     
 
@@ -129,6 +134,7 @@ def input_page():
 def location_page(location):
     response = make_response(redirect(url_for('sentiment_page')))
     response.set_cookie('Location',location)
+    response.set_cookie('Keyword',"NONE") 
     return response
 
 
@@ -136,6 +142,7 @@ def location_page(location):
 def sentiment_page():
     uid = request.cookies.get("UID")
     location = request.cookies.get("Location")
+    keyword = request.cookies.get("Keyword")
     coordDict = {"NY": (40.7829, -73.9682), "LA": (34.0522,-118.2436), "CH": (41.8781,-87.6232),"US":(39.8283, -98.5795)}
     if location != "US":
         zoom = 11
@@ -153,79 +160,80 @@ def sentiment_page():
         #text is 2, lats are 3, lons are 4
         tweetBlob = TextBlob(row[2])
         nounList = tweetBlob.split()
-        if float(tweetBlob.sentiment.polarity)>.75:
-            gmap.marker(float(row[3]), float(row[4]), 'maroon')
-            #print(tweetBlob.sentiment.polarity, row[2])
-            for i in nounList:
-                try:
-                    posNounPhrases[i] += 1
-                except KeyError:
-                    posNounPhrases[i] = 1
-        elif float(tweetBlob.sentiment.polarity)>.5:
-            gmap.marker(float(row[3]), float(row[4]), 'red')
-            #print(tweetBlob.sentiment.polarity, row[2])
-            for i in nounList:
-                try:
-                    posNounPhrases[i] += 1
-                except KeyError:
-                    posNounPhrases[i] = 1
-        elif float(tweetBlob.sentiment.polarity)>.25:
-            gmap.marker(float(row[3]), float(row[4]), 'deeppink')
-            #print(tweetBlob.sentiment.polarity, row[2])
-            for i in nounList:
-                try:
-                    posNounPhrases[i] += 1
-                except KeyError:
-                    posNounPhrases[i] = 1
-        elif float(tweetBlob.sentiment.polarity)>0:
-            gmap.marker(float(row[3]), float(row[4]), 'pink')
-            #print(tweetBlob.sentiment.polarity, row[2])
-            for i in nounList:
-                try:
-                    posNounPhrases[i] += 1
-                except KeyError:
-                    posNounPhrases[i] = 1
-        elif float(tweetBlob.sentiment.polarity)==0:
-            pass #gmap.marker(float(row[3]), float(row[4]), '#FFFFFF')
-            #print(tweetBlob.sentiment.polarity, row[2])
-            count += 1
-        elif float(tweetBlob.sentiment.polarity)>-.25:
-            gmap.marker(float(row[3]), float(row[4]), 'lightblue')
-            #print(tweetBlob.sentiment.polarity, row[2])
-            for i in nounList:
-                #print(i)
-                try:
-                    negNounPhrases[i] += 1
-                except KeyError:
-                    negNounPhrases[i] = 1
-        elif float(tweetBlob.sentiment.polarity)>-.5:
-            gmap.marker(float(row[3]), float(row[4]), 'deepskyblue')
-            #print(tweetBlob.sentiment.polarity, row[2])
-            for i in nounList:
-                #print(i)
-                try:
-                    negNounPhrases[i] += 1
-                except KeyError:
-                    negNounPhrases[i] = 1
-        elif float(tweetBlob.sentiment.polarity)>-.75:
-            gmap.marker(float(row[3]), float(row[4]), 'cornflowerblue')
-            #print(tweetBlob.sentiment.polarity, row[2])
-            for i in nounList:
-                #print(i)
-                try:
-                    negNounPhrases[i] += 1
-                except KeyError:
-                    negNounPhrases[i] = 1
-        elif float(tweetBlob.sentiment.polarity)>-.75:
-            gmap.marker(float(row[3]), float(row[4]), 'darkslateblue')
-            #print(tweetBlob.sentiment.polarity, row[2])
-            for i in nounList:
-                #print(i)
-                try:
-                    negNounPhrases[i] += 1
-                except KeyError:
-                    negNounPhrases[i] = 1
-                
+        if keyword in nounList or keyword == "NONE":
+            if float(tweetBlob.sentiment.polarity)>.75:
+                gmap.marker(float(row[3]), float(row[4]), 'maroon')
+                #print(tweetBlob.sentiment.polarity, row[2])
+                for i in nounList:
+                    try:
+                        posNounPhrases[i] += 1
+                    except KeyError:
+                        posNounPhrases[i] = 1
+            elif float(tweetBlob.sentiment.polarity)>.5:
+                gmap.marker(float(row[3]), float(row[4]), 'red')
+                #print(tweetBlob.sentiment.polarity, row[2])
+                for i in nounList:
+                    try:
+                        posNounPhrases[i] += 1
+                    except KeyError:
+                        posNounPhrases[i] = 1
+            elif float(tweetBlob.sentiment.polarity)>.25:
+                gmap.marker(float(row[3]), float(row[4]), 'deeppink')
+                #print(tweetBlob.sentiment.polarity, row[2])
+                for i in nounList:
+                    try:
+                        posNounPhrases[i] += 1
+                    except KeyError:
+                        posNounPhrases[i] = 1
+            elif float(tweetBlob.sentiment.polarity)>0:
+                gmap.marker(float(row[3]), float(row[4]), 'pink')
+                #print(tweetBlob.sentiment.polarity, row[2])
+                for i in nounList:
+                    try:
+                        posNounPhrases[i] += 1
+                    except KeyError:
+                        posNounPhrases[i] = 1
+            elif float(tweetBlob.sentiment.polarity)==0:
+                pass #gmap.marker(float(row[3]), float(row[4]), '#FFFFFF')
+                #print(tweetBlob.sentiment.polarity, row[2])
+                count += 1
+            elif float(tweetBlob.sentiment.polarity)>-.25:
+                gmap.marker(float(row[3]), float(row[4]), 'lightblue')
+                #print(tweetBlob.sentiment.polarity, row[2])
+                for i in nounList:
+                    #print(i)
+                    try:
+                        negNounPhrases[i] += 1
+                    except KeyError:
+                        negNounPhrases[i] = 1
+            elif float(tweetBlob.sentiment.polarity)>-.5:
+                gmap.marker(float(row[3]), float(row[4]), 'deepskyblue')
+                #print(tweetBlob.sentiment.polarity, row[2])
+                for i in nounList:
+                    #print(i)
+                    try:
+                        negNounPhrases[i] += 1
+                    except KeyError:
+                        negNounPhrases[i] = 1
+            elif float(tweetBlob.sentiment.polarity)>-.75:
+                gmap.marker(float(row[3]), float(row[4]), 'cornflowerblue')
+                #print(tweetBlob.sentiment.polarity, row[2])
+                for i in nounList:
+                    #print(i)
+                    try:
+                        negNounPhrases[i] += 1
+                    except KeyError:
+                        negNounPhrases[i] = 1
+            elif float(tweetBlob.sentiment.polarity)>-.75:
+                gmap.marker(float(row[3]), float(row[4]), 'darkslateblue')
+                #print(tweetBlob.sentiment.polarity, row[2])
+                for i in nounList:
+                    #print(i)
+                    try:
+                        negNounPhrases[i] += 1
+                    except KeyError:
+                        negNounPhrases[i] = 1
+
     dir_path = os.path.dirname(os.path.realpath(__file__))
     newPath = dir_path + "/templates/{0}.html".format(uid)
     gmap.draw(newPath)
@@ -244,12 +252,18 @@ def sentiment_page():
     posCount = 0
     negCount = 0
     for i in range(100):
-        if posCount < 10 and len(pos[i][1])>3:
-            posStr += pos[i][1] + ", "
-            posCount += 1
-        if negCount < 10 and len(neg[i][1])>3:
-            negStr += neg[i][1] + ", "
-            negCount += 1
+        try:
+            if posCount < 10 and len(pos[i][1])>3:
+                posStr += pos[i][1] + ", "
+                posCount += 1
+        except IndexError:
+            posCount = 10
+        try:
+            if negCount < 10 and len(neg[i][1])>3:
+                negStr += neg[i][1] + ", "
+                negCount += 1
+        except IndexError:
+            negCount = 10
     print("Most positive phrases: " + posStr)
     print("Most negative phrases: " + negStr)
     print("Total tweets with neutral sentiment: " + str(count))
@@ -281,4 +295,6 @@ def sentiment_page():
 
     f.close()
     wb.open_new_tab("file://"+newPath)
-    return redirect('/Curl')
+    return redirect('/Home')
+
+

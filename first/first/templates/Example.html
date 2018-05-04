@@ -1,6 +1,7 @@
-{% extends "layout.html" %}
-{% block title %}
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<style>
 			button {
 				    background-color: #4CAF50;
@@ -18,25 +19,18 @@
     				    left:33%;
 				}
 		</style> 
-{% endblock %}
+   	</head>
+	<body>
+		<img id="image" src="https://www.what-dog.net/Images/faces2/scroll0015.jpg">
+		<button id = "button0" class="button" type="button" style="display: none;"> 1. Dog</button></div>
+		<button id = "button1" class="button" type="button" style="display: none;"> 2. Cat</button></div>
+		<button id = "button2" class="button" type="button" style="display: none;"> 3. Frog</button></div>
 
-{% block body %}
-{% for query in data %}
-	<img id="image" src="{{query.image}}">
-		<a href="{{url_for('trial',code=query.url1)}}">
-			<button id = "button0" style="display: none;">{{query.data1}}</button>
-		</a>
-		<a href="{{url_for('trial',code=query.url2)}}">
-			<button id = "button1" style="display: none;">{{query.data2}}</button>
-		</a>
-		<a href="{{url_for('trial',code=query.url3)}}">
-			<button id = "button2" style="display: none;">{{query.data3}}</button>
-		</a>
 		<script>
 			$('#image').delay(2000).hide(0);
   			$('#button0').delay(2000).show(0);
   			$('#button1').delay(2000).show(0);
   			$('#button2').delay(2000).show(0);
 		</script>
-{% endfor %}
-{% endblock %}
+    	</body>
+</html>
