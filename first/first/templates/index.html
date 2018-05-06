@@ -3,8 +3,8 @@
  
 <head>
     <title>Application Home Page</title>
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
 </head>
  
 <body>
@@ -12,15 +12,14 @@
         <div class="header">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="{{url_for('home_page')}}">Project Report</a></li>
-                    <li role="presentation"><a href="{{url_for('curl_page')}}">Dataset</a></li>
+                    <li role="presentation"><a href="{{url_for('curl_page')}}">Stream Tweets</a></li>
                 </ul>
             </nav>
             <h3 class="text-muted">Twitter Sentiment Analysis Application</h3>
         </div>
  
         <div class="jumbotron">
-            <h1>Interested in viewing a sentiment analysis map result for a select locations?</h1>
+            <h1>Please select a location to view map, or select "Keyword" to filter tweets.</h1>
             <p class="lead"></p>
             <p><a class="btn btn-lg btn-success" href="{{url_for('location_page',location="NY")}}" role="button">New York</a></p>
             <p><a class="btn btn-lg btn-success" href="{{url_for('location_page',location="LA")}}" role="button">Los Angelas</a></p>
@@ -32,20 +31,14 @@
  
         <div class="row marketing">
             <div class="col-lg-6">
-                <h4>Why sentiment analysis?</h4>
-                <p>Sentiment analysis of data has always been an important, but has become a harder but interesting task as applications like Twitter have grown. Tweets contain data that can be short or informal, which can be a problem, but more importantly it contains a large dataset which can help with testing and analyzing trends. Understanding the mood people show off to different phenomenon's can be used in many different ways to adjust the phoenomenon. </p>
+                <h4>Abstract</h4>
+                <p>For our project we created an application that scrapes tweets in real-time across the continental United States. Our application then creates and displays dynamic map of the United States showing the location and sentiment of the streamed tweets. To do the sentiment analysis we used the TextBlob python library, and to create the map we used the gmplot library. Our application is built using a Flask front end which allows the user to specify their various desired inputs, such as a location to center the map on and a keyword to parse the database with. The output from our application will be a rendered map depicting the overall emotion of the United States, centered on the specified location or showing only tweets containing the specified keyword. Additionally, this map displays the most common words in both positive and negative sentiment tweets as a 'event discovery' method, however, this functionality is pretty basic at this point in time. </p>
 
-                <h4>Objective</h4>
-                <p>Our goal was to design a tweet sentiment analyzing application. The application would preform a series of tasks on twitter data we access using Tweepy. The application has the ability of collecting tweets and storing them for future analysis. The data can be displayed to the user as raw data, or as a map that displays the results of the sentiment analysis algorithm. </p>
- 
- 
-                <h4>Future Work</h4>
-                <p>We're greatful that Twitter provides us with large amounts of data, but how that data can be used to analyze something like sentiment can be tricky. There are an infitite number of algorithms that can be implemented to analyze the sentiment of tweets, some tested some untested. In our project we decided that the only way our      </p>
             </div>
         </div>
  
         <footer class="footer">
-            <p>&copy; Mikel Kota, Gabriel, Anthony -- Social Sensing -- Spring 2018 -- Notre Dame </p>
+            <p>&copy; Mikel Kota, Gabriel Wright, Anthony DiFalco-- Social Sensing -- Spring 2018 -- Notre Dame </p>
         </footer>
  
     </div>

@@ -273,8 +273,8 @@ def sentiment_page():
     with open(newPath,"r+") as f:
         data = f.readlines()
         for line in data:
-            if count==2:
-                f.write('<meta http-equiv="refresh" content="120; url=http://127.0.0.1:5000/SentimentPins"/>')
+            #if count==2:
+#                f.write('<meta http-equiv="refresh" content="120; url=http://127.0.0.1:5000/SentimentPins"/>')
             count+=1
             if flag==True and flag2==True:
                 flag2 = False
