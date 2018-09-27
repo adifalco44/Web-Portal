@@ -24,12 +24,7 @@ class ReusableForm(Form):
 DATABASE = 'tmp/index.db'
 #PER_PAGE = 30
 #DEBUG = True
-#SECRET_KEY = b'_5#y2L"F4Q8z\n\xec]/'
 
-consumer_key="QMM9pAjHKYRQ4gMGNbNRDugHu"
-consumer_secret="00uRXAzclsmQE0MjR5LYOhwZJPfJQaXBmNJJ4gI9bZfGEwi286"
-access_token="1170470796-W0IQzj5X4NAZZ0WN6dGic7cUeBSX3jhbJlCAwkG"
-access_token_secret="kfhFd1Uw2cOfojmWLyoT3myF3LUmA6GcbXKelE6nuOKNK"
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
